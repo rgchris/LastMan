@@ -51,7 +51,7 @@ Week of 8-Dec-2018
 "Man. Utd" Han
 ```
 
-The `Teams` value in the header should point (`file!` | `url!`) to a Rebol file containing `text! [file! | url! | binary!]` pairs with team name and image.
+The `Teams` value in the header should point (`file! | url!`) to a Rebol file containing `text! [file! | url! | binary!]` pairs with team name and image.
 
 ```rebol
 "Bournemouth" %bournemouth.png
