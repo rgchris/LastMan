@@ -16,11 +16,15 @@ Rebol [
 
 no-content: ""
 
-section-builder: func [proto [block!] body [block!] return: [function!]][
+section-builder: func [
+    proto [block!]
+    body [block!]
+    return: [function!]
+][
     func [
         params [block! blank!]
         content [string! block!]
-        /local yield
+        <local> yield
     ] compose/only [
         params: make (make object! proto) any [:params []]
         yield: delimit compose [(content)] newline
@@ -38,15 +42,15 @@ app: section-builder [
             | <meta charset="utf-8">
             | <title> :title </title>
             | <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-            | <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-            | <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+            | <script src="//code.jquery.com/jquery-1.11.1.min.js"> </script>
+            | <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"> </script>
             if style [
                 for-each value compose [(style)][
                     switch type-of style [
-                        :file! :url! [
+                        file! url! [
                             unspaced [| build-tag compose [link href (style) rel "stylesheet" type "text/css"]]
                         ]
-                        :string! [
+                        text! [
                             unspaced [
                                 | <style type="text/css">
                                 | sanitize trim/auto style
@@ -95,6 +99,9 @@ page: section-builder [
     | </div>
 ]
 
-build-jqm: func [params [block!] content [block!]][
+build-jqm: func [
+    params [block!]
+    content [block!]
+][
     app bind params 'app bind content 'app
 ]
